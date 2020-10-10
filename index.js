@@ -9,15 +9,21 @@ const parser = (roomId) => {
       const img = $('p.room-profile-head-image img').attr('src');
       const showLink = $('ul.room-profile-head-action-menu li a').attr('href');
       let result = {};
-      let dateText;
       $('ul.room-profile-menu').find('li').each(function (i) {
          let schedule = $(this).find('p').text();
-         schedule = schedule.replace('Show : ', '');
+         const scheduleClass = $(this).find('p').attr('class');
+         const liveNow = scheduleClass === 'is-active';
+
+         if(liveNow) {
+            schedule = schedule.replace('Live : ', '');
+         } else {
+            schedule = schedule.replace('Show : ', '');
+         }
          const parseTime = schedule.split(" ");
          if (parseTime.length > 0 && parseTime[0] !== 'TBD') {
-            dateText = parseTime.join(' ');
+            result.liveNow = liveNow;
             result.image = img;
-            result.schedule = dateText;
+            result.schedule = parseTime.join(' ');
             result.showUrl = `https://www.showroom-live.com${showLink}`;
          }
       })
