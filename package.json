@@ -1,0 +1,16 @@
+{
+  "name": "showroom-member-update",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "MuhBayu",
+  "license": "MIT",
+  "dependencies": {
+    "bluebird": "^3.7.2",
+    "cheerio": "^1.0.0-rc.3",
+    "unirest": "^0.6.0"
+  }
+}
