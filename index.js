@@ -7,6 +7,7 @@ const parser = (roomId) => {
    return request.get(`https://www.showroom-live.com/room/profile?room_id=${roomId}`).then(res => {
       const $ = cheerio.load(res.body);
       const img = $('p.room-profile-head-image img').attr('src');
+      const showLink = $('ul.room-profile-head-action-menu li a').attr('href');
       let result = {};
       let dateText;
       $('ul.room-profile-menu').find('li').each(function (i) {
@@ -17,6 +18,7 @@ const parser = (roomId) => {
             dateText = parseTime.join(' ');
             result.image = img;
             result.schedule = dateText;
+            result.showUrl = `https://www.showroom-live.com${showLink}`;
          }
       })
       return result;
